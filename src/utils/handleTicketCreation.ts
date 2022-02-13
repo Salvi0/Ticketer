@@ -144,11 +144,6 @@ const handleRest = async (
 	subject: string
 ) => {
 	try {
-		const onlineManagers = managers.members.filter(
-			(manager) => manager.presence?.status === 'online'
-		);
-		const presences = onlineManagers.map((manager) => `🟢 ${memberNicknameMention(manager.id)}`);
-
 		const channelEmbed = new MessageEmbed()
 			.setColor('DARK_GREEN')
 			.setAuthor({
@@ -158,7 +153,6 @@ const handleRest = async (
 			.setTitle('Support Ticket')
 			.setDescription(`${memberNicknameMention(interaction.user.id)} created a new support ticket`)
 			.addField('Subject', subject)
-			.addField('Available Managers', presences?.length ? presences.join('\n') : 'Unknown', true)
 			.addField('Ticket Date', time(channel.createdAt, 'R'), true)
 			.setTimestamp();
 
